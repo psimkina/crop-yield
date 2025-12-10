@@ -7,10 +7,13 @@ from sklearn.preprocessing import OrdinalEncoder
 def preprocess_features(df: pd.DataFrame, numerical_cols: list[str], categorical_cols: list[str]) -> pd.DataFrame:
     """Preprocess the features in the DataFrame."""
     # Normalize numerical features
-    for col in numerical_cols: 
-        normalize_features(df, col)
-    for col in categorical_cols:
-        encode_categorical_features(df, col)
+    if numerical_cols:
+        for col in numerical_cols: 
+            normalize_features(df, col)
+
+    if categorical_cols:
+        for col in categorical_cols:
+            encode_categorical_features(df, col)
     return df
 
 def normalize_features(df: pd.DataFrame, column: str) -> pd.DataFrame:
